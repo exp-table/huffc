@@ -119,6 +119,9 @@ var parseMacro = function (macro, macros, constants, jumptables) {
             else
                 operations.push({ type: types_1.OperationType.PUSH_JUMP_LABEL, value: token[1], args: [] });
         }
+        else if (input.match(defintions_1.MACRO_CODE.SPECIAL_CODE_SIZE)) {
+            operations.push({ type: types_1.OperationType.SCODESIZE, value: "", args: [] });
+        }
         // Throw if the value is not parsable.
         else
             throw new Error("Could not parse input");

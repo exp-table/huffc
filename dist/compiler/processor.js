@@ -151,6 +151,13 @@ var processMacro = function (name, bytecodeOffset, args, macros, constants, jump
                 // Return the bytecode.
                 return opcodes_1["default"].jumpdest;
             }
+            case types_1.OperationType.SCODESIZE: {
+                console.log("fart");
+                // Add to the offset.
+                offset += 3;
+                // Return the bytecode.
+                return "".concat(opcodes_1["default"].push2, "yyyy");
+            }
             // Default
             default: {
                 throw new Error("Processor: Cannot understand operation ".concat(operation.type, " in ").concat(name, "."));

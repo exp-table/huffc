@@ -22,11 +22,9 @@ const parseMacro = (
   // Store a copy of the body and args.
   let input = macros[macro].value;
   const args = macros[macro].args;
-
   // Loop through the body.
   while (!isEndOfData(input)) {
     let token: string[];
-
     // Check if we're parsing a macro call.
     if (
       input.match(MACRO_CODE.MACRO_CALL) &&
@@ -103,7 +101,6 @@ const parseMacro = (
     else if (input.match(MACRO_CODE.TABLE_START)) {
       // Parse the table start call.
       token = input.match(MACRO_CODE.TABLE_START);
-
       // Add the table start call to the token list.
       operations.push({ type: OperationType.TABLE_START_POSITION, value: token[1], args: [] });
     }
@@ -130,7 +127,6 @@ const parseMacro = (
     else if (input.match(MACRO_CODE.LITERAL_HEX)) {
       // Parse the value.
       token = input.match(MACRO_CODE.LITERAL_HEX);
-
       // Format the value.
       const hex = formatEvenBytes(token[1]);
 
@@ -138,11 +134,15 @@ const parseMacro = (
       operations.push({ type: OperationType.PUSH, value: toHex(95 + hex.length / 2), args: [hex] });
     }
 
+    else if (input.match(MACRO_CODE.SPECIAL_CODE_SIZE)) {
+        token = input.match(MACRO_CODE.SPECIAL_CODE_SIZE);
+        operations.push({type: OperationType.SCODESIZE, value: "", args: []});
+    }
+
     // Check if we're parsing an opcode.
     else if (input.match(MACRO_CODE.TOKEN) && !constants[input.match(MACRO_CODE.TOKEN)[1]]) {
       // Parse the macro.
       token = input.match(MACRO_CODE.TOKEN);
-
       // Add the opcode to the token list.
       // The value pushed is dependent on whether it's a jump label
       // or an opcode.
@@ -150,9 +150,9 @@ const parseMacro = (
         operations.push({ type: OperationType.OPCODE, value: token[1], args: [] });
       else operations.push({ type: OperationType.PUSH_JUMP_LABEL, value: token[1], args: [] });
     }
+
     // Throw if the value is not parsable.
     else throw new Error("Could not parse input");
-
     // Slice the input
     input = input.slice(token[0].length);
   }

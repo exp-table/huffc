@@ -49,9 +49,10 @@ const compile = (args: HuffCompilerArgs) => {
   const deployedBytecode = `${constructorCode}${mainBytecode}${
     args.constructorArgs ? encodeArgs(args.constructorArgs) : ""
   }`;
+  const formattedDeployedbytecode = deployedBytecode.replace(new RegExp("yyyy", 'g'), padNBytes(toHex(constructorCode.length/2 + mainBytecode.length/2), 2));
 
   // Return the bytecode.
-  return { bytecode: deployedBytecode, runtimeBytecode: mainBytecode, abi: abi };
+  return { bytecode: formattedDeployedbytecode, runtimeBytecode: mainBytecode, abi: abi };
 };
 
 /**

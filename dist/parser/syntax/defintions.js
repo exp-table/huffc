@@ -152,7 +152,7 @@ exports.MACRO_CODE = {
         /* Open Parenthesis */
         "\\(",
         /* Any alphanumeric combination */
-        "([a-zA-Z0-9_\\-<>]*)",
+        "([a-zA-Z0-9_, \\-<>]*)",
         /* Closing parenthesis */
         "\\)\\s*\\n*",
     ]),
@@ -203,5 +203,9 @@ exports.MACRO_CODE = {
     /* Syntax for template calls */
     ARG_CALL: (0, regex_1.combineRegexElements)(["^(?:[\\s\\n]*)", "<([a-zA-Z0-9_\\-\\+\\*]+)>", "\\s*\\n*"]),
     /* Syntax for jumptables */
-    JUMP_LABEL: (0, regex_1.combineRegexElements)(["^(?:[\\s\\n]*)([a-zA-Z0-9_\\-]+):\\s*\\n*"])
+    JUMP_LABEL: (0, regex_1.combineRegexElements)(["^(?:[\\s\\n]*)([a-zA-Z0-9_\\-]+):\\s*\\n*"]),
+    SPECIAL_CODE_SIZE: (0, regex_1.combineRegexElements)([
+        /* The string "__scodesize" */
+        "^(?:[\\s\\n]*)__scodesize"
+    ])
 };

@@ -12,6 +12,7 @@ var OperationType;
     OperationType["CONSTANT_CALL"] = "CONSTANT_CALL";
     OperationType["ARG_CALL"] = "ARG_CALL";
     OperationType["CODESIZE"] = "CODESIZE";
+    OperationType["SCODESIZE"] = "SCODESIZE";
     OperationType["TABLE_START_POSITION"] = "TABLE_START_POSITION";
 })(OperationType = exports.OperationType || (exports.OperationType = {}));
 /* Top Level Context */

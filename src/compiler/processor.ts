@@ -182,6 +182,14 @@ export const processMacro = (
         // Return the bytecode.
         return opcodes.jumpdest;
       }
+
+      case OperationType.SCODESIZE: {
+        // Add to the offset.
+        offset += 3;
+        // Return the bytecode.
+        return `${opcodes.push2}yyyy`;
+      }
+
       // Default
       default: {
         throw new Error(`Processor: Cannot understand operation ${operation.type} in ${name}.`);
@@ -253,7 +261,6 @@ export const processMacro = (
     // Return the new bytecode.
     return accumulator + formattedBytecode;
   }, "");
-
   // Return the result.
   return { bytecode: newBytecode, unmatchedJumps, tableInstances, jumptable, jumpindices };
 };

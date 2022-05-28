@@ -96,6 +96,6 @@ export const compileMacro = (
     // Insert the offset value.
     bytecode = `${before}${padNBytes(toHex(tableOffsets[name]), 2)}${after}`;
   });
-
+  
   return bytecode;
 };
